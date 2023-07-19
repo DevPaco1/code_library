@@ -70,7 +70,10 @@ def read(file_name: str) -> str:
 
     Returns(str): File content
     """
+    if not os.path.exists(file_name):
+        raise FileNotFoundError(f"File {file_name} was not found")
+    
     file = open(file_name)
     content = file.read()
     file.close()
-    return content
+    return json.loads(content)
