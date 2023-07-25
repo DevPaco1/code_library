@@ -5,17 +5,17 @@ import os
 
     
 def decorator1(func):
-    def wrapper():
-        func()
+    def wrapper(self):
+        func(self)
         if not os.path.exists("usuarios.log"):
-            files.create("articles.json", "se ha creado el primer usuario nuevo")
+            files.create("usuarios.log",['se ha creado un nuevo usuario'])
         else:
-             files.update("articles.json", "se agrego un nuevo usuario")
+             files.update("usuarios.log", ['se agrego un nuevo usuario'])
     return wrapper
 
 def decorator2(func):
-    def wrapper():
-        func()
+    def wrapper(self):
+        func(self)
         print("se ha guardado una nueva entidad")
         
     return wrapper
@@ -106,7 +106,7 @@ def constructor_json(archivo: str):
 
 
 
-user = User("paco", "castañeda")
+user = User("isai", "castañeda")
 user.save()
 
 
