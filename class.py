@@ -12,6 +12,7 @@ class User:
         self.email = email
         self.dict = {}
 
+ 
     def save(self):
         self.dict.update(
             {
@@ -77,14 +78,52 @@ class Comments:
             files.update("articles.json", self.dict)
 
 
-user = User("paco", "castañeda")
-user.save()
-print(user.__dict__)
+def get_all_users(lista_diccionario):
+    pass
 
-article1 = Article('El principito', 'En un lugar muy lejano...')
+def constructor_json(archivo: str):
+    content = files.read(archivo)
+    for us in content:
+        user = User(**us)
+        print(user.__dict__)
+
+def decorator1(func):
+    def wrapper():
+           func()
+    if not os.path.exists("usuarios.log"):
+         files.create("articles.json", "se ha creado el primer usuario nuevo")
+    else:
+        files.update("articles.json", "se agrego un nuevo usuario")
+    return wrapper
+
+def decorador2(func):
+    def wrapper():
+        func()
+        print("se ha guardado una nueva entidad")
+        
+    return wrapper
+    
+
+
+user = User("paco", "castañeda")
+@decorator1
+@decorador2
+user.save()
+
+
+'''
+user = User("isai", "rivera")
+user.save()
+user = User("rosa", "estrada")
+user.save()
+user = User("emanuel", "bustos")
+user.save()'''
+'''article1 = Article('El principito', 'En un lugar muy lejano...')
 article1.save()
 print(article1.__dict__)
 
 coment1 = Comments('JAJAJA')
 coment1.save()
-print(coment1.__dict__)
+print(coment1.__dict__)'''
+
+constructor_json('users.json')
