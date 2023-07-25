@@ -3,6 +3,22 @@ import json
 import os
 
 
+    
+def decorator1(func):
+    def wrapper():
+        func()
+        if not os.path.exists("usuarios.log"):
+            files.create("articles.json", "se ha creado el primer usuario nuevo")
+        else:
+             files.update("articles.json", "se agrego un nuevo usuario")
+    return wrapper
+
+def decorator2(func):
+    def wrapper():
+        func()
+        print("se ha guardado una nueva entidad")
+        
+    return wrapper
 class User:
     def __init__(self, first_name, last_name, username="", password="", email=""):
         self.first_name = first_name
@@ -11,8 +27,9 @@ class User:
         self.password = password
         self.email = email
         self.dict = {}
-
- 
+    
+    @decorator1
+    @decorator2
     def save(self):
         self.dict.update(
             {
@@ -87,27 +104,9 @@ def constructor_json(archivo: str):
         user = User(**us)
         print(user.__dict__)
 
-def decorator1(func):
-    def wrapper():
-           func()
-    if not os.path.exists("usuarios.log"):
-         files.create("articles.json", "se ha creado el primer usuario nuevo")
-    else:
-        files.update("articles.json", "se agrego un nuevo usuario")
-    return wrapper
-
-def decorador2(func):
-    def wrapper():
-        func()
-        print("se ha guardado una nueva entidad")
-        
-    return wrapper
-    
 
 
 user = User("paco", "castañeda")
-@decorator1
-@decorador2
 user.save()
 
 
@@ -126,4 +125,3 @@ coment1 = Comments('JAJAJA')
 coment1.save()
 print(coment1.__dict__)'''
 
-constructor_json('users.json')
